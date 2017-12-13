@@ -1,15 +1,26 @@
-function SpriteRenderer(sprite) {
+function TextRenderer(text, font, size, color) {
     this.name = 'sprite-renderer'
 
-    this.sprite = sprite
+    this.text = text
+    this.font = font
+    this.textSize = size
+    this.color = color
 
     this.start = (object) => {
-        this.image = window.helium.cachedImages[sprite]
+        
     }
 
-    this.changeImage = (sprite) => {
-        this.sprite = sprite
-        this.image = window.helium.cachedImages[sprite]
+    this.changeText = (text) => {
+        this.text = text
+    }
+    this.changeFont = (font) => {
+        this.font = font
+    }
+    this.changeSize = (size) => {
+        this.textSize = size
+    }
+    this.changeColor = (color) => {
+        this.color = color
     }
 
     this.update = (object) => {
@@ -34,9 +45,11 @@ function SpriteRenderer(sprite) {
         window.helium.canvas.context.translate(-window.helium.canvas.object.width / 2,
             -window.helium.canvas.object.height / 2)
 
-        window.helium.canvas.context.drawImage(this.image,
-            relativePosition.x, relativePosition.y,
-            object.size.x, object.size.y)
+        window.helium.canvas.context.fillStyle = color
+        window.helium.canvas.context.font = this.textSize + 'px ' + this.font
+        
+        window.helium.canvas.context.fillText(this.text,
+            relativePosition.x, relativePosition.y)
 
         window.helium.canvas.context.restore()
     }

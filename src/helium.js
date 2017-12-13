@@ -5,7 +5,14 @@ function Helium() {
     this.startOverride = () => {}
     this.updateOverride = () => {}
 
-    this.Init = (data, functions) => {
+    this.currentFrameRate = {}
+
+    this.Init = (data, functions, scene) => {
+        if(scene) {
+            console.log('loaded scene from' + scene.name)
+            this.objects = scene.objects
+        }
+
         this.frameRate = data.frameRate
 
         window.helium = {}
@@ -13,7 +20,11 @@ function Helium() {
         window.helium.cachedImages = {}
 
         window.helium.canvas.object = document.getElementById(data.canvasId)
-        
+
+        window.helium.canvas.object.width = document.body.clientWidth; 
+        window.helium.canvas.object.height = document.body.clientHeight;
+
+        window.helium.camera = new Object('logo', {x: 0, y: 0}, 0, {x: 0, y: 0})
         //WebGL2D.enable(window.helium.canvas.object)
 
         window.helium.canvas.context = window.helium.canvas.object.getContext('2d')
@@ -44,6 +55,11 @@ function Helium() {
     }
 
     let Start = () => {
+        this.objects = new Object('root', {x: 0, y: 0}, 0, {x: 0, y: 0})
+        this.objects.start()
+
+        let cameraObject = new Object('camera', {x: 0, y: 0}, 0, {x: 0, y: 0})
+        this.addObject(cameraObject)
         this.startOverride()
 
         window.requestAnimationFrame(Update)
@@ -53,16 +69,15 @@ function Helium() {
         window.helium.canvas.context.clearRect(0, 0, canvas.width, canvas.height)
         this.updateOverride()
 
-        for(let objectKey in this.objects) {
-            let object = this.objects[objectKey]
-            object.update()
-        }
+        this.objects.update()
 
         window.requestAnimationFrame(Update)
     }
 
     this.addObject = (object) => {
-        this.objects[object.name] = object
+        object.parent = this.objects
+        this.objects.addChild(object)
+        object.start()
     }
 
     this.removeObject = (name) => {
