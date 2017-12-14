@@ -1,0 +1,7 @@
+{
+  "name": "heliumjs-editor",
+  "short_name": "heliumjs-editor",
+  "description": "Visual editor for Helium.JS game engine",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>heliumjs-editor</title>
+    <meta name="description" content="Visual editor for Helium.JS game engine">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="import" href="/src/editor-module/editor-module.html">
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+
+        --primary-color: #090F14;
+        --primary-darker-color: #030507;
+        --primary-dark-color: #000101;
+        --primary-lighter-color: #16212B;
+        --primary-light-color: #2A4054; 
+
+        font-family: 'Roboto', 'Noto', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <editor-module></editor-module>
+  </body>
+</html>

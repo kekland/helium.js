@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="hierarchy-object-module">
+  <template>
+    <style>
+    </style>
+    
+    <div id="hierarchyObject">
+      <div id="name">{{name}}</div>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class HierarchyObjectModule extends Polymer.Element {
+      static get is() { return 'hierarchy-object-module'; }
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            value: () => {return 'Default Name'}
+          }
+        };
+      }
+    }
+
+    window.customElements.define(HierarchyObjectModule.is, HierarchyObjectModule);
+  </script>
+</dom-module>
